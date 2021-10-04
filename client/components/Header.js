@@ -4,7 +4,6 @@ import { Link } from "react-router";
 
 import CurrentUser from "../queries/CurrentUser";
 import Logout from "../mutations/Logout";
-// import Login from "../mutations/Login";
 
 class Header extends Component {
   onLogoutHandler() {
@@ -15,9 +14,7 @@ class Header extends Component {
 
   renderButtons() {
     const { loading, user } = this.props.data;
-    if (loading) {
-      return <div>Logout</div>;
-    } else {
+    if (!loading) {
       if (user) {
         return (
           <li>
@@ -46,6 +43,7 @@ class Header extends Component {
           <Link to="/" className="brand-logo left">
             Home
           </Link>
+          {this.props.loading ? <div className="center">Loading</div> : null}
           <ul className="right row">
             <div className="col">{this.renderButtons()}</div>
           </ul>
